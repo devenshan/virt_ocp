@@ -1,4 +1,5 @@
 
+[f31:vars]
 f31_packages:
   - wget
   - libguestfs-tools
@@ -29,3 +30,9 @@ f31_packages:
   - python-virtualbmc
   - ntpdate
   - NetworkManager-ovs
+  - setroubleshoot-server
+  - tmux
+  - telnet
+  - vim-enhanced
+  - bash-completion
+  - vim
