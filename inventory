@@ -36,3 +36,5 @@ f31_packages:
   - vim-enhanced
   - bash-completion
   - vim
+  - ansible
+  - git
