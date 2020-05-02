@@ -1,0 +1,17 @@
+---
+- name: install packages
+  hosts: localhost
+  connection: local 
+
+  tasks:
+    - group:
+        name: ansible
+        state: present
+
+
+    - user:
+        name: ansible
+        password: "{{ pass_encrypt_sha512 }}"
+        group: ansible
+        groups: wheel
+        append: yes
