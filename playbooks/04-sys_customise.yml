@@ -9,7 +9,7 @@
   
   # Add the kvm_intel modprobe  params.
     - template:
-        src: templates/sysctl_kvm_intel.yml
+        src: /root/virt_ocp/templates/sysctl_kvm_intel.yml
         dest: /etc/modprobe.d/kvm_intel.conf
       notify: restart vbmcd
 
