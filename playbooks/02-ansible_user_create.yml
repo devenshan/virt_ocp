@@ -2,7 +2,8 @@
 - name: install packages
   hosts: localhost
   connection: local 
-
+  vars_files: ../allvars.yml
+  
   tasks:
     - group:
         name: ansible
