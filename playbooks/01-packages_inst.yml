@@ -1,0 +1,12 @@
+---
+- name: install packages
+  hosts: localhost
+  connection: local
+  vars_files: allvars.yml
+
+
+  tasks:
+    - dnf:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ f31_packages }}"
