@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Install ansible 
-echo "Installing Ansible package" 
+echo "Installing packages - vim-enhanced,ansible." 
 dnf -yq install ansible
 echo
 echo "Adding variables into bash_profile and vimrc..."
 echo
 echo "alias vi=vim" >>  ~/.bash_profile
-echo "alias asc=ansible-playbook --syntax-check" >>  ~/.bash_profile
+echo "alias asc='ansible-playbook --syntax-check'" >>  ~/.bash_profile
 echo "alias ad=ansible-doc" >>  ~/.bash_profile
 echo "autocmd FileType yaml setlocal ai ts=2 sw=2 et" >> ~/.vimrc
 echo
@@ -17,7 +17,7 @@ echo "done"
 echo
 echo " starting NTPD" 
 echo
-systemctl -q -y start ntpd
+systemctl -q start ntpd
 systemctl enable ntpd
 echo
 
