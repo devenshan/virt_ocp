@@ -12,3 +12,5 @@
         url: "{{ qcow2_url }}"
         dest: /root/images/rhel-server.qcow2
         checksum: sha256:ce4943d38e00a5c81272ebd3f3542b2d9557382d1c331c46ed553fdcca778b2d
+        owner: qemu
+        group: qemu
