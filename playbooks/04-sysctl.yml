@@ -3,7 +3,8 @@
   hosts: localhost
   connection: local
   become: yes
-  vars_files: allvars.yml
+  vars_files: ../allvars.yml
+  
   tasks:
     - template:
         src: templates/sysctl_kvm_intel.yml
