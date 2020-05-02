@@ -1,0 +1,88 @@
+---
+- name: create VMs
+  hosts: localhost
+  connection: local
+  become: yes
+
+
+  roles:
+    - role: libvirt-vm
+      libvirt_vms:
+        - state: present
+          name: 'master1'
+          memory_mb: 16384
+          vcpus: 8
+          volumes:
+            - name: 'master1'
+              device: 'disk'
+              format: 'qcow2'
+              capacity: '50GB'
+              pool: 'default'
+              image: '/root/images/rhel-server.qcow2'
+          interfaces:
+            - network: 'default'
+              mac: '52:54:00:7a:e1:64'
+
+
+        - state: present
+          name: 'master2'
+          memory_mb: 16384
+          vcpus: 8
+          volumes:
+            - name: 'master2'
+              device: 'disk'
+              format: 'qcow2'
+              capacity: '50GB'
+              pool: 'default'
+              image: '/root/images/rhel-server.qcow2'
+          interfaces:
+            - network: 'default'
+              mac: '52:54:00:30:66:8d'
+
+
+        - state: present
+          name: 'master3'
+          memory_mb: 16384
+          vcpus: 8
+          volumes:
+            - name: 'master3'
+              device: 'disk'
+              format: 'qcow2'
+              capacity: '50GB'
+              pool: 'default'
+              image: '/root/images/rhel-server.qcow2'
+          interfaces:
+            - network: 'default'
+              mac: '52:54:00:74:96:ce'
+
+
+        - state: present
+          name: 'worker1'
+          memory_mb: 16384
+          vcpus: 8
+          volumes:
+            - name: 'worker1'
+              device: 'disk'
+              format: 'qcow2'
+              capacity: '30GB'
+              pool: 'default'
+              image: '/root/images/rhel-server.qcow2'
+          interfaces:
+            - network: 'default'
+              mac: '52:54:00:74:dd:bb'
+
+
+        - state: present
+          name: 'worker2'
+          memory_mb: 16384
+          vcpus: 8
+          volumes:
+            - name: 'worker2'
+              device: 'disk'
+              format: 'qcow2'
+              capacity: '30GB'
+              pool: 'default'
+              image: '/root/images/rhel-server.qcow2'
+          interfaces:
+            - network: 'default'
+              mac: '52:54:00:e4:e6:e6'
