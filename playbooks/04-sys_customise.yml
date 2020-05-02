@@ -6,12 +6,14 @@
   vars_files: ../allvars.yml
   
   tasks:
+  
+  # Add the kvm_intel modprobe  params.
     - template:
         src: templates/sysctl_kvm_intel.yml
         dest: /etc/modprobe.d/kvm_intel.conf
       notify: restart vbmcd
 
-
+# Configure the sysctl params
     - sysctl:
         name: "{{ item.param }}"
         value: "{{ item.val }}"
@@ -19,14 +21,20 @@
         sysctl_set: yes
         reload: yes
       loop: "{{ sysctl_vars }}"
+    
+# Enable and start the libvirtd service    
+    - systemd:
+        name: libvirtd
+        state: started
+        enabled: yes
 
-# Stop a network
+# Stop the default network
     - virt_net:
         command: destroy
         name: default
 
 
-# Add a new host in the dhcp pool
+# Add a static IPs in the dhcp pool
     - virt_net:
         name: default
         command: modify
@@ -37,7 +45,7 @@
           <host mac='52:54:00:74:dd:bb' name='worker1' ip='192.168.122.31'/>
           <host mac='52:54:00:e4:e6:e6' name='worker2' ip='192.168.122.32'/>
 
-# Start a network
+# Start the default network
     - virt_net:
         command: create
         name: default   
