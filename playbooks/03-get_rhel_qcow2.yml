@@ -2,6 +2,8 @@
 - hosts: localhost
   connection: local
   become: true
+  vars_files: ../allvars.yml
+  
   vars_prompt:
     - name: "qcow2_url"
       prompt: "RHEL QCOW2 url"
