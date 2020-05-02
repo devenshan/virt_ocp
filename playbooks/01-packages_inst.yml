@@ -2,7 +2,7 @@
 - name: install packages
   hosts: localhost
   connection: local
-  vars_files: allvars.yml
+  vars_files: ../allvars.yml
 
 
   tasks:
