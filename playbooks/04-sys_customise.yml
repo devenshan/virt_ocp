@@ -38,7 +38,7 @@
     - virt_net:
         name: default
         command: modify
-        xml: "{{ multi_pattern }}"
+        xml: '{{ lookup("template", "templates/static_ips_virt_net.xml.j2") }}'
 
 # Start the default network
     - virt_net:
