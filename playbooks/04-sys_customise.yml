@@ -46,12 +46,37 @@
     - virt_net:
         command: create
         name: default
-        
+
+# 
+# Sets default ACL 
+    - acl:
+        path: "{{ item.acl_path }}"
+        entity: "{{ item.entity_name }}"
+        etype: "{{ item.entity_type }}"
+        permissions: "{{ item.acl_perms }}"
+        recursive: yes
+        default: yes
+        state: present
+      loop: "{{ setfacl_vars }}
+    
+     
+# Managing the file contexts on a DIR
+    - sefcontext:
+        target: "{{ item.sefcontext_tgt_path }}"
+        setype: ""{{ item.sefcontext_type }}"
+        state: "{{ item.sefcontext_state }}"
+      loop: "{{ semanage_fcontext_vars }}"
+    
+    - name: Apply new SELinux file context to filesystem
+      command: restorecon -vvFR /home/images
+
 # Create a storage pool         
 #    - virt_pool: 
 #      command: build
 #      name: default
 #      autostart: yes
+
+
 
   handlers:
     - name: restart vbmcd
