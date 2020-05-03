@@ -45,7 +45,13 @@
 # Start the default network
     - virt_net:
         command: create
-        name: default   
+        name: default
+        
+# Create a storage pool         
+#    - virt_pool: 
+#      command: build
+#      name: default
+#      autostart: yes
 
   handlers:
     - name: restart vbmcd
