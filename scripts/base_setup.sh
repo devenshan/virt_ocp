@@ -56,4 +56,8 @@ echo "Installing FreeIPA, Bind and related dependencies..."
 dnf -q -y install freeipa-*
 dnf -q -y install freeipa-* bind bind-chroot
 
+echo "Setting up Git repo"
+dnf -y -q install git
+git clone https://github.com/devenshan/virt_ocp.git
+
 echo "Finished."
