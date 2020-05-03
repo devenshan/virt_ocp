@@ -70,11 +70,27 @@
     - name: Apply new SELinux file context to filesystem
       command: restorecon -vvFR /home/images
 
-# Create a storage pool         
-#    - virt_pool: 
-#      command: build
-#      name: default
-#      autostart: yes
+# Define a new storage pool
+    - virt_pool:
+        command: define
+        name: default
+        xml: '{{ lookup("template", "/root/virt_ocp/templates/pool.xml.j2") }}'
+    
+# Build a storage pool if it does not exist
+    - virt_pool:
+        command: build
+        name: default
+    
+# Start a storage pool
+    - virt_pool:
+        command: create
+        name: default
+    
+# Ensure that a pool is active and autostarted (needs to be defined and built first)
+    - virt_pool:
+        state: active
+        autostart: yes
+        name: default
 
 
 
