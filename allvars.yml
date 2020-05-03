@@ -47,13 +47,28 @@ multi_pattern:
   - "<host mac='52:54:00:74:96:ce' name='master3' ip='192.168.122.23'/>"
   - "<host mac='52:54:00:74:dd:bb' name='worker1' ip='192.168.122.31'/>"
   - "<host mac='52:54:00:e4:e6:e6' name='worker2' ip='192.168.122.32'/>"
+
 sysctl_vars:
   - param: net.ipv4.conf.default.rp_filter
     val: 0
   - param: net.ipv4.conf.all.rp_filter
     val: 0
 
-
+setfacl_vars:
+  - acl_path: /home/images
+    entity_name: qemu
+    entity_type: user
+    acl_perms: rwx
+  - acl_path: /home/images
+    entity_name: qemu
+    entity_type: group
+    acl_perms: rwx
+ 
+ semanage_fcontext_vars:
+   - sefcontext_tgt_path: /home/images(/.*)?'
+     sefcontext_type: 'virt_image_t' 
+     sefcontext_state: 'present'
+     
 guest_vars:
   master1:
     name: 'master1'
