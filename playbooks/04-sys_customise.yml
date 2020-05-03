@@ -57,18 +57,18 @@
         recursive: yes
         default: yes
         state: present
-      loop: "{{ setfacl_vars }}
+      loop: "{{ setfacl_vars }}"
     
      
 # Managing the file contexts on a DIR
     - sefcontext:
         target: "{{ item.sefcontext_tgt_path }}"
-        setype: ""{{ item.sefcontext_type }}"
+        setype: "{{ item.sefcontext_type }}"
         state: "{{ item.sefcontext_state }}"
       loop: "{{ semanage_fcontext_vars }}"
     
     - name: Apply new SELinux file context to filesystem
-      command: restorecon -vvFR /home/images
+      command: 'restorecon -vvFR /home/images'
 
 # Define a new storage pool
     - virt_pool:
@@ -93,7 +93,7 @@
         name: default
 
 
-
+# Define all the Handlers
   handlers:
     - name: restart vbmcd
       systemd:
