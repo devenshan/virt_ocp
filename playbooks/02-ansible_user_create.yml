@@ -9,10 +9,15 @@
         name: ansible
         state: present
 
-
     - user:
         name: ansible
         password: "{{ pass_encrypt_sha512 }}"
         group: ansible
         groups: wheel
         append: yes
+
+    - template:
+        src: /root/virt_ocp/templates/ansible_sudoers.yml
+        dest: /etc/sudoers.d/ansible
+        validate: 'visudo -cf %s'
+        mode: 0440
