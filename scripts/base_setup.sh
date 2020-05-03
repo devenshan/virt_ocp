@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Install ansible 
-echo "Installing packages - vim-enhanced,ansible." 
-dnf -yq install ansible
+echo "Installing packages - vim-enhanced,ansible,git,cockpit, cockpit-machines,freeipa,bind,bind-chroot." 
+dnf -yq install ansible git cockpit cockpit-machines freeipa-* bind bind-chroot
 echo
 echo "Adding variables into bash_profile and vimrc..."
 echo
@@ -38,26 +38,12 @@ net.ipv4.conf.all.rp_filter = 0
 EOF
 
 echo
-echo " install Cockpit." 
-
-dnf -y install cockpit
-
-echo
 echo "Start and Enable Cockpit."
 systemctl enable cockpit.socket
 systemctl -q start cockpit.socket
 
-echo
-echo "Install cockpit-machines."
-dnf -q -y install cockpit-machines
-
-echo
-echo "Installing FreeIPA, Bind and related dependencies..."
-dnf -q -y install freeipa-*
-dnf -q -y install freeipa-* bind bind-chroot
 
 echo "Setting up Git repo"
-dnf -y -q install git
 git clone https://github.com/devenshan/virt_ocp.git
 
 echo "Finished."
