@@ -1,0 +1,82 @@
+
+pass_encrypt_sha512: '$6$ph5TtYyHDAS6QnLV$b/za9eq15UuT1WLIqhhcuWX5XF56v.KvZjAy3wrlu0VmI2a7akrDlkW9Bel50I4gMcIZbD6U/roHLFTuqrRJi/'
+
+
+f31_packages:
+  - wget
+  - libguestfs-tools
+  - libguestfs-xfs
+  - screen
+  - net-tools
+  - ntp
+  - bind-utils
+  - lshw
+  - libvirt
+  - qemu-kvm
+  - virt-manager
+  - virt-install
+  - openvswitch
+  - xorg-x11-apps
+  - xauth
+  - virt-viewer
+  - tcpdump
+  - bind-utils
+  - dejavu-fonts-common
+  - dejavu-sans-fonts
+  - dejavu-sans-mono-fonts
+  - dejavu-serif-fonts
+  - numactl
+  - firefox
+  - lshw
+  - tmux
+  - python-virtualbmc
+  - ntpdate
+  - NetworkManager-ovs
+  - setroubleshoot-server
+  - tmux
+  - telnet
+  - vim-enhanced
+  - bash-completion
+  - vim
+  - ansible
+  - git
+
+multi_pattern: >
+  <host mac='52:54:00:7a:e1:64' name='master1' ip='192.168.122.21'/>
+  <host mac='52:54:00:30:66:8d' name='master2' ip='192.168.122.22'/>
+  <host mac='52:54:00:74:96:ce' name='master3' ip='192.168.122.23'/>
+  <host mac='52:54:00:74:dd:bb' name='worker1' ip='192.168.122.31'/>
+  <host mac='52:54:00:e4:e6:e6' name='worker2' ip='192.168.122.32'/>
+sysctl_vars:
+  - param: net.ipv4.conf.default.rp_filter
+    val: 0
+  - param: net.ipv4.conf.all.rp_filter
+    val: 0
+
+
+guest_vars:
+  master1:
+    name: 'master1'
+    vcpu: '8'
+    mem: '16384'
+    size: '50GB'
+  master2:
+    name: 'master2'
+    vcpu: '8'
+    mem: '16384'
+    size: '50GB'
+  master3:
+    name: 'master3'
+    vcpu: '8'
+    mem: '16384'
+    size: '50GB'
+  worker1:
+    name: 'worker1'
+    vcpu: '8'
+    mem: '16384'
+    size: '30GB'
+  worker2:
+    name: 'worker2'
+    vcpu: '8'
+    mem: '16384'
+    size: '30GB'

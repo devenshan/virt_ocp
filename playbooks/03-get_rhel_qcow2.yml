@@ -9,6 +9,10 @@
       prompt: "RHEL QCOW2 url"
 
   tasks:
+    - file: 
+      path: '/root/images'
+      state: 'directory'
+      mode: '0755'
 
     - get_url:
         url: "{{ qcow2_url }}"
