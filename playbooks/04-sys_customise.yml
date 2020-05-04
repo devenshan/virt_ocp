@@ -70,11 +70,13 @@
     - name: Apply new SELinux file context to filesystem
       command: 'restorecon -vvFR /home/images'
 
+# Gather facts about storage pools
+    - name: Gather facts about storage pools
+      virt_pool:
+        command: facts
 
-# Define a new storage pool
-# Build a storage pool if it does not exist
-# Start a storage pool
-# Ensure that a pool is active and autostarted (needs to be defined and built first)
+# Based on conditional, Define a new storage pool, Build, Start and Ensure that 
+# the pool is active and autostarted
     - block: 
         - virt_pool:
             command: define
