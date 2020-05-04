@@ -50,7 +50,7 @@
 # 
 # Sets default ACL 
     - acl:
-        path: "{{ item.acl_path }}"
+        path: "{{ virt_pool_dir }}"
         entity: "{{ item.entity_name }}"
         etype: "{{ item.entity_type }}"
         permissions: "{{ item.acl_perms }}"
@@ -70,32 +70,33 @@
     - name: Apply new SELinux file context to filesystem
       command: 'restorecon -vvFR /home/images'
 
-    - block: 
+
 # Define a new storage pool
+# Build a storage pool if it does not exist
+# Start a storage pool
+# Ensure that a pool is active and autostarted (needs to be defined and built first)
+    - block: 
         - virt_pool:
             command: define
             name: default
             xml: '{{ lookup("template", "/root/virt_ocp/templates/pool.xml.j2") }}'
+          register: virt_pool_result
     
-# Build a storage pool if it does not exist
         - virt_pool:
             command: build
             name: default
     
-# Start a storage pool
         - virt_pool:
             command: create
             name: default
     
-# Ensure that a pool is active and autostarted (needs to be defined and built first)
         - virt_pool:
             state: active
             autostart: yes
             name: default
-    when: ansible_libvirt_pools != "default" or ansible_libvirt_pools['default']['path'] != "/home/images"
-    register: virt_pool_result
+      when: ansible_libvirt_pools != "default" or ansible_libvirt_pools['default']['path'] != "{{ virt_pool_dir }}"
 
-    - rescue: 
+      rescue: 
         - debug:
             var: virt_pool_result
 

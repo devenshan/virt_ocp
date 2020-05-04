@@ -54,18 +54,18 @@ sysctl_vars:
   - param: net.ipv4.conf.all.rp_filter
     val: 0
 
+virt_pool_dir: "/home/images"
+
 setfacl_vars:
-  - acl_path: /home/images
-    entity_name: qemu
+  - entity_name: qemu
     entity_type: user
     acl_perms: rwx
-  - acl_path: /home/images
-    entity_name: qemu
+  - entity_name: qemu
     entity_type: group
     acl_perms: rwx
  
 semanage_fcontext_vars:
- - sefcontext_tgt_path: /home/images(/.*)?'
+ - sefcontext_tgt_path: '"{{ virt_pool_dir }}"(/.*)?'
    sefcontext_type: 'virt_image_t' 
    sefcontext_state: 'present'
      
